@@ -22,7 +22,6 @@ class RecentPostsShortcode
     public function __construct(LoggerInterface $logger)
     {
         $this->logger = $logger;
-        $this->logger = new Logger('MY-log');
         $this->logger->pushHandler(new StreamHandler(plugin_dir_path(__FILE__) . 'plugin.log', Logger::INFO));
 
         add_shortcode('recent_posts', [$this, 'render_recent_posts']);
@@ -47,7 +46,7 @@ class RecentPostsShortcode
             $this->logger->error('No posts found');
             return 'No posts found.';
         }
-        $this->logger->warning("Number of Posts: ", ['count'  => $atts['count']]);
+        $this->logger->info("Number of Posts: ", ['count'  => $atts['count']]);
         $output = '<ul>';
 
         while ($query->have_posts()) {
@@ -132,4 +131,6 @@ class RecentPostsShortcode
         return $actions;
     }
 }
+
+$logger = new Logger('MY-log');
 $recentPostsShortcode = new RecentPostsShortcode($logger);
