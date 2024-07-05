@@ -132,6 +132,4 @@ class RecentPostsShortcode
         return $actions;
     }
 }
-$logger = new Logger('recent-posts-shortcode');
-$logger->pushHandler(new StreamHandler(__DIR__ . '/logs/plugin.log', Logger::DEBUG));
 $recentPostsShortcode = new RecentPostsShortcode($logger);
